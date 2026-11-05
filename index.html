@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moinuddin Mullan — Full-Stack &amp; AI/ML Developer</title>
+<meta name="description" content="Portfolio of Moinuddin Mullan — Full-Stack and AI/ML Developer (MCA student). Projects, research papers, certifications and contact details.">
+<meta name="theme-color" content="#05080f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+:root {
+  --bg: #05080f;
+  --bg2: #080d18;
+  --bg3: #0b1220;
+  --cyan: #00e5cc;
+  --violet: #a855f7;
+  --amber: #f59e0b;
+  --white: #e8f0fe;
+  --muted: #4a5568;
+  --dim: #8fa1b8;
+  --border: rgba(0,229,204,0.15);
+  --border-h: rgba(0,229,204,0.6);
+  --glow: 0 0 30px rgba(0,229,204,0.15);
+  --glow-h: 0 0 40px rgba(0,229,204,0.35);
+
+  /* glass tokens */
+  --glass: linear-gradient(135deg, rgba(255,255,255,0.09), rgba(255,255,255,0.025));
+  --glass-line: rgba(255,255,255,0.13);
+  --glass-shadow: 0 10px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.14);
+  --blur: blur(16px) saturate(150%);
+  --radius: 18px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'JetBrains Mono',monospace;overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%}
+
+/* ─── CURSOR (only on devices with a real mouse) ─── */
+#cursor,#cursor-ring{display:none}
+.has-cursor,.has-cursor *{cursor:none !important}
+.has-cursor #cursor,.has-cursor #cursor-ring{display:block;opacity:0}
+.has-cursor.cursor-on #cursor,.has-cursor.cursor-on #cursor-ring{opacity:1}
+#cursor{position:fixed;left:0;top:0;width:8px;height:8px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s,opacity .3s}
+#cursor-ring{position:fixed;left:0;top:0;width:36px;height:36px;border:1px solid rgba(0,229,204,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s,opacity .3s}
+.cursor-hover #cursor{width:14px;height:14px;background:var(--violet)}
+.cursor-hover #cursor-ring{width:56px;height:56px;border-color:rgba(168,85,247,0.6)}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:2px}
+::selection{background:rgba(0,229,204,.3);color:#fff}
+
+/* ─── SPACE BACKGROUND (orbs + stars + meteors) ─── */
+.space-orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%}
+.orb.o1{width:62vmax;height:62vmax;left:-22vmax;top:-18vmax;background:radial-gradient(circle,rgba(0,229,204,.16),transparent 62%);animation:orbFloat 26s ease-in-out infinite}
+.orb.o2{width:58vmax;height:58vmax;right:-20vmax;top:30vh;background:radial-gradient(circle,rgba(168,85,247,.17),transparent 62%);animation:orbFloat 32s ease-in-out infinite reverse}
+.orb.o3{width:46vmax;height:46vmax;left:15vw;bottom:-22vmax;background:radial-gradient(circle,rgba(245,158,11,.07),transparent 62%);animation:orbFloat 38s ease-in-out infinite}
+#space-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ─── NOISE OVERLAY ─── */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:.4;pointer-events:none;z-index:1}
+
+/* ─── SCROLL PROGRESS ─── */
+#progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--violet));z-index:9997;width:0%;transition:width .1s}
+
+/* ─── GLASS PRIMITIVE ─── */
+.glass{
+  position:relative;
+  background:var(--glass);
+  border:1px solid var(--glass-line);
+  border-radius:var(--radius);
+  -webkit-backdrop-filter:var(--blur);
+  backdrop-filter:var(--blur);
+  box-shadow:var(--glass-shadow);
+  transition:box-shadow .4s, border-color .4s, transform .4s cubic-bezier(.16,1,.3,1);
+}
+.glass::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+  background:linear-gradient(135deg,rgba(0,229,204,.45),transparent 40%,transparent 60%,rgba(168,85,247,.38));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask-composite:exclude;
+  opacity:.5;transition:opacity .4s;
+}
+.glass:hover{box-shadow:var(--glass-shadow),0 0 40px rgba(0,229,204,.12)}
+.glass:hover::before{opacity:1}
+@supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  .glass{background:rgba(11,18,32,.88)}
+}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;width:100%;z-index:900;padding:1.1rem 4rem;display:flex;justify-content:space-between;align-items:center;transition:all .4s}
+nav.scrolled{background:rgba(8,13,24,.55);-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);border-bottom:1px solid var(--glass-line);box-shadow:0 8px 30px rgba(0,0,0,.35);padding:.8rem 4rem}
+.nav-logo{font-family:'Orbitron',monospace;font-size:1.05rem;font-weight:900;color:var(--cyan);letter-spacing:.1em;border:1px solid rgba(0,229,204,.55);padding:.3rem .8rem;text-decoration:none;border-radius:10px;background:rgba(0,229,204,.07);box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.7rem;letter-spacing:.15em;color:var(--dim);text-decoration:none;transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--cyan);transition:width .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--cyan)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;padding:0 11px;border:1px solid var(--glass-line);border-radius:12px;background:rgba(255,255,255,.06);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);cursor:pointer}
+.nav-toggle span{display:block;height:2px;background:var(--cyan);border-radius:2px;transition:transform .3s,opacity .3s}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ─── HERO ─── */
+#hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:7rem 4rem 6rem;overflow:hidden}
+canvas#bg-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero-content{position:relative;z-index:2;max-width:1280px;width:100%;margin:0 auto}
+.hero-label{font-size:.68rem;letter-spacing:.3em;color:var(--cyan);margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s .4s forwards}
+.hero-name{font-family:'Orbitron',monospace;font-size:clamp(2.1rem,7.2vw,6.2rem);font-weight:900;line-height:1.02;letter-spacing:-.02em;margin-bottom:1.2rem}
+.hero-name .line{overflow:hidden;display:block;padding-bottom:.08em}
+.hero-name .word{display:inline-block;transform:translateY(110%);animation:slideUp .9s cubic-bezier(.16,1,.3,1) forwards}
+.hero-name .w1{animation-delay:.5s}.hero-name .w2{animation-delay:.65s}.hero-name .w3{animation-delay:.8s}
+.hero-name .accent{color:var(--cyan);text-shadow:0 0 40px rgba(0,229,204,.35)}
+.hero-name .hero-sub{font-size:clamp(.8rem,2.2vw,1.6rem);font-weight:400;letter-spacing:.12em;color:var(--dim);font-family:'JetBrains Mono',monospace}
+.hero-typewriter{font-size:clamp(.85rem,2vw,1.1rem);color:var(--dim);margin-bottom:2.2rem;min-height:1.8em;opacity:0;animation:fadeUp .8s 1.1s forwards}
+.hero-typewriter .cursor-blink{color:var(--cyan);animation:blink .8s infinite}
+.hero-btns{display:flex;flex-wrap:wrap;gap:1rem;opacity:0;animation:fadeUp .8s 1.3s forwards}
+.btn-primary,.btn-outline,.btn-ghost{display:inline-flex;align-items:center;gap:.6rem;font-family:'Orbitron',monospace;font-size:.7rem;letter-spacing:.12em;padding:.85rem 1.8rem;text-decoration:none;border-radius:12px;position:relative;overflow:hidden;transition:all .3s}
+.btn-primary{background:var(--cyan);color:var(--bg);font-weight:700;border:1px solid var(--cyan);box-shadow:0 8px 30px rgba(0,229,204,.25)}
+.btn-primary::before{content:'';position:absolute;inset:0;background:var(--violet);transform:translateX(-101%);transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.btn-primary:hover::before{transform:translateX(0)}
+.btn-primary:hover{color:#fff;border-color:var(--violet)}
+.btn-primary span{position:relative;z-index:1}
+.btn-outline{background:rgba(168,85,247,.08);color:var(--violet);border:1px solid rgba(168,85,247,.7);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.btn-outline:hover{background:rgba(168,85,247,.18);box-shadow:0 0 25px rgba(168,85,247,.25)}
+.btn-ghost{background:rgba(255,255,255,.06);color:var(--white);border:1px solid var(--glass-line);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:var(--glow)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.2rem;opacity:0;animation:fadeUp .8s 1.5s forwards}
+.pill{display:inline-flex;align-items:center;gap:.5rem;font-size:.66rem;letter-spacing:.06em;color:var(--dim);padding:.45rem .95rem;border-radius:999px;border:1px solid var(--glass-line);background:rgba(255,255,255,.05);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.pill b{color:var(--cyan);font-weight:500}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:2;opacity:0;animation:fadeUp .8s 1.6s forwards}
+.hero-scroll span{font-size:.6rem;letter-spacing:.2em;color:var(--dim)}
+.scroll-line{width:1px;height:46px;background:linear-gradient(to bottom,var(--cyan),transparent);animation:scrollAnim 2s ease-in-out infinite}
+
+/* ─── SECTIONS ─── */
+section{padding:7rem 4rem;position:relative;z-index:2;scroll-margin-top:30px}
+#hero{padding:7rem 4rem 6rem}
+.wrap{max-width:1280px;margin:0 auto}
+.section-tag{font-size:.65rem;letter-spacing:.3em;color:var(--cyan);margin-bottom:.8rem;display:flex;align-items:center;gap:.7rem}
+.section-tag::before{content:'';width:30px;height:1px;background:var(--cyan)}
+.section-h{font-family:'Orbitron',monospace;font-size:clamp(1.7rem,4vw,3.2rem);font-weight:900;line-height:1.1;margin-bottom:1rem}
+.section-h .us{color:var(--cyan)}
+.sub-h{font-family:'Orbitron',monospace;font-size:clamp(1.1rem,2.4vw,1.6rem);font-weight:700;margin:4.5rem 0 1.6rem}
+.sub-h .us{color:var(--cyan)}
+.section-lead{font-size:.82rem;color:var(--dim);max-width:720px;line-height:1.8}
+
+.js .reveal{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.16,1,.3,1) var(--d,0s),transform .8s cubic-bezier(.16,1,.3,1) var(--d,0s)}
+.js .reveal.visible{opacity:1;transform:none}
+.js .reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .8s cubic-bezier(.16,1,.3,1) var(--d,0s),transform .8s cubic-bezier(.16,1,.3,1) var(--d,0s)}
+.js .reveal-left.visible{opacity:1;transform:none}
+.js .reveal-right{opacity:0;transform:translateX(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1) var(--d,0s),transform .8s cubic-bezier(.16,1,.3,1) var(--d,0s)}
+.js .reveal-right.visible{opacity:1;transform:none}
+
+/* ─── ICONS ─── */
+.ic{width:14px;height:14px;fill:currentColor;flex:none}
+.ic-s{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ─── ABOUT ─── */
+.about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:4rem;align-items:center;margin-top:3rem}
+.about-bio{padding:2rem 2.2rem}
+.about-bio p{font-size:.86rem;color:var(--dim);line-height:1.9}
+.about-bio p+p{margin-top:1rem}
+.about-bio strong{color:var(--white);font-weight:500}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem}
+.stat-card{padding:1.2rem .8rem;text-align:center;border-radius:16px}
+.stat-num{font-family:'Orbitron',monospace;font-size:2rem;font-weight:900;color:var(--cyan);display:block;line-height:1.2}
+.stat-label{font-size:.6rem;letter-spacing:.15em;color:var(--dim);margin-top:.3rem;display:block}
+.about-img-wrap{display:flex;justify-content:center}
+.avatar-wrap{position:relative;width:min(400px,78vw);aspect-ratio:1/1}
+.hex-frame{width:100%;height:100%;clip-path:polygon(50% 0%,95% 25%,95% 75%,50% 100%,5% 75%,5% 25%);background:rgba(11,18,32,.5);border:2px solid var(--cyan);overflow:hidden;position:relative;transition:box-shadow .4s}
+.hex-frame:hover{box-shadow:0 0 60px rgba(0,229,204,.3)}
+.hex-ring,.hex-ring2{position:absolute;clip-path:polygon(50% 0%,95% 25%,95% 75%,50% 100%,5% 75%,5% 25%);top:50%;left:50%;pointer-events:none}
+.hex-ring{width:108.75%;height:108.75%;border:1px solid rgba(0,229,204,.2);transform:translate(-50%,-50%);animation:hexRotate 12s linear infinite}
+.hex-ring2{width:117.5%;height:117.5%;border:1px solid rgba(168,85,247,.15);transform:translate(-50%,-50%);animation:hexRotate 18s linear infinite reverse}
+
+/* education */
+.edu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+.edu-card{padding:1.4rem 1.5rem;height:100%;display:flex;flex-direction:column;gap:.35rem}
+.edu-period{font-size:.65rem;letter-spacing:.18em;color:var(--cyan)}
+.edu-inst{font-family:'Orbitron',monospace;font-size:.82rem;font-weight:700;line-height:1.45}
+.edu-deg{font-size:.76rem;color:var(--dim)}
+.edu-grade{align-self:flex-start;margin-top:.5rem;font-size:.66rem;letter-spacing:.06em;color:var(--white);padding:.25rem .7rem;border-radius:8px;border:1px solid rgba(168,85,247,.35);background:rgba(168,85,247,.1)}
+.edu-now{color:var(--amber);margin-left:.6rem;letter-spacing:.12em}
+
+/* ─── PROJECTS ─── */
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.projects-grid>.reveal{display:flex}
+.proj-card{width:100%;display:flex;flex-direction:column;overflow:hidden;padding:0}
+.proj-card:hover{transform:translateY(-8px);border-color:rgba(0,229,204,.5)}
+.proj-card-top{background:rgba(255,255,255,.04);padding:.7rem 1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--glass-line)}
+.dot{width:10px;height:10px;border-radius:50%}
+.d-red{background:#ff5f57}.d-yellow{background:#febc2e}.d-green{background:#28c840}
+.proj-domain{margin-left:auto;font-size:.58rem;letter-spacing:.12em;color:var(--violet);border:1px solid rgba(168,85,247,.35);background:rgba(168,85,247,.08);padding:.2rem .6rem;border-radius:6px;text-align:right}
+.proj-body{padding:1.4rem;display:flex;flex-direction:column;flex:1}
+.proj-date{font-size:.62rem;letter-spacing:.18em;color:var(--cyan);margin-bottom:.4rem}
+.proj-title{font-family:'Orbitron',monospace;font-size:.92rem;font-weight:700;margin-bottom:.3rem;color:var(--white);line-height:1.4}
+.proj-sub{font-size:.7rem;color:var(--amber);margin-bottom:.8rem;letter-spacing:.03em}
+.proj-points{list-style:none;margin:.6rem 0 1.1rem;display:flex;flex-direction:column;gap:.5rem}
+.proj-points li{font-size:.74rem;color:var(--dim);line-height:1.7;padding-left:1.1rem;position:relative}
+.proj-points li::before{content:'›';position:absolute;left:0;color:var(--cyan);font-weight:700}
+.proj-points b{color:var(--white);font-weight:500}
+.proj-stack{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.3rem}
+.tag{font-size:.6rem;letter-spacing:.06em;color:var(--cyan);border:1px solid rgba(0,229,204,.28);background:rgba(0,229,204,.06);padding:.2rem .55rem;border-radius:6px}
+.proj-links{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:auto}
+.proj-link{font-size:.65rem;letter-spacing:.1em;color:var(--white);text-decoration:none;border:1px solid var(--glass-line);background:rgba(255,255,255,.05);padding:.4rem .85rem;border-radius:9px;transition:all .3s;display:inline-flex;align-items:center;gap:.45rem}
+.proj-link:hover{color:var(--cyan);border-color:var(--cyan);background:rgba(0,229,204,.08);box-shadow:var(--glow)}
+.proj-card-bar{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--violet));transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.16,1,.3,1);z-index:2}
+.proj-card:hover .proj-card-bar{transform:scaleX(1)}
+
+/* ─── SKILLS ─── */
+.skills-grid{display:grid;grid-template-columns:3fr 2fr;gap:2rem;margin-top:3rem;align-items:start}
+.skill-panel{padding:1.6rem 2rem}
+.panel-title{font-size:.65rem;letter-spacing:.25em;color:var(--violet);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
+.panel-title::after{content:'';flex:1;height:1px;background:rgba(168,85,247,.25)}
+.skill-row{display:grid;grid-template-columns:165px 1fr;gap:1rem;align-items:start;padding:.9rem 0;border-bottom:1px dashed rgba(255,255,255,.09)}
+.skill-row:last-child{border-bottom:none}
+.skill-label{font-size:.68rem;letter-spacing:.08em;color:var(--white);padding-top:.25rem}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem}
+.chip{font-size:.68rem;color:var(--cyan);border:1px solid rgba(0,229,204,.28);background:rgba(0,229,204,.06);padding:.28rem .7rem;border-radius:8px;transition:all .3s}
+.chip:hover{background:rgba(0,229,204,.14);box-shadow:var(--glow);transform:translateY(-2px)}
+.chip.v{color:#d6b4ff;border-color:rgba(168,85,247,.35);background:rgba(168,85,247,.09)}
+.chip.v:hover{background:rgba(168,85,247,.18);box-shadow:0 0 25px rgba(168,85,247,.2)}
+.side-stack{display:flex;flex-direction:column;gap:1.5rem}
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem}
+.tool-chip{border:1px solid var(--glass-line);background:rgba(255,255,255,.04);padding:.7rem .6rem;text-align:center;font-size:.64rem;letter-spacing:.06em;color:var(--dim);transition:all .3s;border-radius:10px}
+.tool-chip:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:var(--glow);transform:translateY(-2px)}
+
+/* ─── RESEARCH ─── */
+.research-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:3rem}
+.research-grid>.reveal{display:flex}
+.paper-card{width:100%;padding:1.8rem;display:flex;flex-direction:column;gap:.9rem}
+.paper-status{align-self:flex-start;font-size:.58rem;letter-spacing:.14em;color:var(--amber);border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.08);padding:.25rem .7rem;border-radius:999px}
+.paper-title{font-family:'Orbitron',monospace;font-size:.98rem;font-weight:700;line-height:1.45}
+.paper-team{font-size:.72rem;color:var(--cyan);letter-spacing:.04em}
+.paper-desc{font-size:.76rem;color:var(--dim);line-height:1.85}
+.paper-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.metric{border:1px solid var(--glass-line);background:rgba(255,255,255,.04);border-radius:12px;padding:.7rem .4rem;text-align:center}
+.metric b{display:block;font-family:'Orbitron',monospace;font-size:1.05rem;color:var(--cyan);font-weight:700}
+.metric span{font-size:.56rem;letter-spacing:.08em;color:var(--dim)}
+.paper-card .proj-links{padding-top:.4rem}
+
+/* ─── CREDENTIALS ─── */
+.cert-list{display:grid;gap:1rem;margin-top:3rem}
+.cert-card{display:grid;grid-template-columns:auto 1fr auto;gap:1.3rem;align-items:center;padding:1.2rem 1.5rem}
+.cert-icon{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;color:var(--cyan);border:1px solid rgba(0,229,204,.3);background:rgba(0,229,204,.07)}
+.cert-icon svg{width:24px;height:24px}
+.cert-title{font-family:'Orbitron',monospace;font-size:.84rem;font-weight:700;line-height:1.5}
+.cert-meta{font-size:.7rem;color:var(--amber);margin-top:.2rem;letter-spacing:.03em}
+.cert-id{font-size:.66rem;color:var(--dim);margin-top:.25rem;word-break:break-all}
+.badge-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.badge-grid>.reveal{display:flex}
+.badge-card{width:100%;display:flex;gap:1.5rem;align-items:center;padding:1.5rem}
+.badge-img{flex:0 0 auto;display:block;width:140px;height:140px;border-radius:16px;transition:transform .4s cubic-bezier(.16,1,.3,1),filter .4s;filter:drop-shadow(0 10px 22px rgba(0,229,204,.2))}
+.badge-img img{width:100%;height:100%;display:block;object-fit:contain}
+.badge-img:hover{transform:scale(1.07) rotate(-2deg);filter:drop-shadow(0 12px 30px rgba(168,85,247,.45))}
+.badge-info{display:flex;flex-direction:column;gap:.35rem;min-width:0}
+.badge-title{font-family:'Orbitron',monospace;font-size:.86rem;font-weight:700;line-height:1.45}
+.badge-hint{font-size:.6rem;letter-spacing:.08em;color:var(--dim)}
+.badge-info .proj-links{margin-top:.6rem}
+
+/* ─── CONTACT ─── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:3rem;align-items:start}
+.contact-info{padding:2rem}
+.contact-info>p{font-size:.82rem;color:var(--dim);line-height:1.9;margin-bottom:1.5rem}
+.contact-links{display:flex;flex-direction:column;gap:.65rem}
+.contact-link{font-size:.74rem;color:var(--dim);text-decoration:none;display:flex;align-items:center;gap:.8rem;transition:all .3s;letter-spacing:.03em;padding:.65rem .9rem;border-radius:12px;border:1px solid transparent;background:rgba(255,255,255,.03);word-break:break-word}
+.contact-link .ic{width:16px;height:16px;color:var(--cyan)}
+a.contact-link:hover{color:var(--cyan);border-color:rgba(0,229,204,.35);background:rgba(0,229,204,.06)}
+.social-row{display:flex;gap:.8rem;margin-top:1.5rem}
+.social-btn{width:42px;height:42px;border:1px solid var(--glass-line);background:rgba(255,255,255,.05);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .3s;text-decoration:none;color:var(--dim)}
+.social-btn:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:var(--glow);transform:translateY(-3px)}
+.social-btn .ic{width:17px;height:17px}
+.form-card{padding:2rem}
+.form-group{margin-bottom:1.2rem}
+.form-label{font-size:.62rem;letter-spacing:.2em;color:var(--dim);display:block;margin-bottom:.5rem}
+.form-input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--glass-line);border-radius:10px;padding:.8rem 1rem;color:var(--white);font-family:'JetBrains Mono',monospace;font-size:.8rem;outline:none;transition:border-color .3s,box-shadow .3s,background .3s}
+.form-input:focus{border-color:var(--cyan);background:rgba(0,229,204,.05);box-shadow:0 0 0 3px rgba(0,229,204,.12)}
+.form-input::placeholder{color:#5d6b80}
+textarea.form-input{resize:vertical;min-height:120px}
+.btn-submit{font-family:'Orbitron',monospace;font-size:.72rem;letter-spacing:.15em;padding:.95rem;width:100%;background:rgba(0,229,204,.08);border:1px solid var(--cyan);color:var(--cyan);cursor:pointer;transition:all .4s;position:relative;overflow:hidden;margin-top:.4rem;border-radius:12px}
+.btn-submit::before{content:'';position:absolute;inset:0;background:var(--cyan);transform:translateY(101%);transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.btn-submit:hover::before{transform:translateY(0)}
+.btn-submit:hover{color:var(--bg)}
+.btn-submit span{position:relative;z-index:1}
+.form-note{font-size:.62rem;color:var(--dim);margin-top:.9rem;letter-spacing:.04em}
+
+/* ─── FOOTER ─── */
+footer{margin:0 4rem 2rem;padding:1.3rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;z-index:2;position:relative;border-radius:16px}
+footer p{font-size:.65rem;letter-spacing:.1em;color:var(--dim)}
+footer span{color:var(--cyan)}
+
+/* ─── KEYFRAMES ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideUp{from{transform:translateY(110%)}to{transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes scrollAnim{0%,100%{transform:scaleY(1);transform-origin:top}50%{transform:scaleY(.5);transform-origin:bottom}}
+@keyframes hexRotate{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes orbFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(4vmax,3vmax)}}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1100px){
+  .projects-grid{grid-template-columns:1fr 1fr}
+  .skill-row{grid-template-columns:130px 1fr}
+}
+@media(max-width:900px){
+  :root{--blur:blur(12px) saturate(140%)}
+  nav,nav.scrolled{padding:.85rem 1.2rem}
+  .nav-toggle{display:flex}
+  .nav-links{display:none;position:absolute;top:calc(100% + 8px);right:1rem;flex-direction:column;gap:0;min-width:210px;padding:.6rem;border-radius:16px;background:rgba(8,13,24,.88);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border:1px solid var(--glass-line);box-shadow:0 20px 40px rgba(0,0,0,.5)}
+  .nav-links.open{display:flex}
+  .nav-links a{display:block;padding:.75rem 1rem}
+  .nav-links a::after{display:none}
+  #hero{padding:6.5rem 1.5rem 5rem}
+  section{padding:5rem 1.5rem}
+  .about-grid,.skills-grid,.contact-grid,.research-grid,.badge-grid,.edu-grid{grid-template-columns:1fr}
+  .about-grid{gap:3rem}
+  .about-bio{padding:1.5rem}
+  footer{margin:0 1rem 1rem;flex-direction:column;text-align:center}
+}
+@media(max-width:700px){
+  .cert-card{grid-template-columns:auto 1fr}
+  .cert-card .proj-links{grid-column:1 / -1}
+}
+@media(max-width:600px){
+  .projects-grid{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr}
+  .skill-row{grid-template-columns:1fr;gap:.5rem}
+  .skill-panel,.form-card,.contact-info{padding:1.4rem}
+  .badge-card{flex-direction:column;text-align:center}
+  .badge-info{align-items:center}
+  .paper-metrics{grid-template-columns:1fr}
+  .tools-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-height:720px){.hero-scroll{display:none}}
+
+/* ─── REDUCED MOTION ─── */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  .hero-label,.hero-typewriter,.hero-btns,.hero-meta,.hero-scroll{opacity:1;animation:none}
+  .hero-name .word{transform:none;animation:none}
+  .js .reveal,.js .reveal-left,.js .reveal-right{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- SVG icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
+    <symbol id="i-kaggle" viewBox="0 0 24 24"><path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.285.18.046.149.034.255-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.07.311z"/></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></symbol>
+  </defs>
+</svg>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="progress"></div>
+
+<!-- SPACE BACKGROUND -->
+<div class="space-orbs" aria-hidden="true"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<canvas id="space-canvas" aria-hidden="true"></canvas>
+
+<!-- NAV -->
+<nav id="navbar" aria-label="Main navigation">
+  <a href="#hero" class="nav-logo" aria-label="Back to top">MM</a>
+  <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about">01.about</a></li>
+    <li><a href="#projects">02.projects</a></li>
+    <li><a href="#skills">03.skills</a></li>
+    <li><a href="#research">04.research</a></li>
+    <li><a href="#credentials">05.credentials</a></li>
+    <li><a href="#contact">06.contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="hero-content">
+    <p class="hero-label">// FULL-STACK DEVELOPER &amp; AI/ML DEVELOPER</p>
+    <h1 class="hero-name">
+      <span class="line"><span class="word w1">MOINUDDIN</span></span>
+      <span class="line"><span class="word w2 accent">MULLAN</span></span>
+      <span class="line"><span class="word w3 hero-sub">WHERE DATA MEETS INTELLIGENCE</span></span>
+    </h1>
+    <p class="hero-typewriter"><span id="typed-text"></span><span class="cursor-blink">█</span></p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="#projects"><span>EXPLORE MY WORK</span></a>
+      <a class="btn-outline" href="#contact">INIT CONTACT</a>
+      <a class="btn-ghost" href="Moinuddin_Mullan_Resume.pdf" download><svg class="ic ic-s"><use href="#i-download"/></svg>RESUME</a>
+    </div>
+    <div class="hero-meta">
+      <span class="pill"><svg class="ic ic-s"><use href="#i-pin"/></svg>Valsad, Gujarat, India</span>
+      <span class="pill"><b>MCA</b> · SRIMCA, UTU Bardoli</span>
+      <span class="pill"><b>Open to</b> Remote · Relocation</span>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-tag reveal">ABOUT</div>
+    <h2 class="section-h reveal" style="--d:.1s">// who_am_i<span class="us">_</span></h2>
+    <div class="about-grid">
+      <div>
+        <div class="about-bio glass reveal-left" style="--d:.2s">
+          <p>I'm a <strong>Master of Computer Applications (MCA)</strong> student at Shrimad Rajchandra Institute of Management &amp; Computer Application (UTU), Bardoli, with a strong foundation in <strong>full-stack development</strong> and <strong>AI/ML</strong>. I work with Java, Python, JavaScript, React, Node.js, PyTorch and TensorFlow, and I enjoy taking an idea all the way from a trained model to a deployed product.</p>
+          <p>My projects range from an IoT attendance system that pairs face recognition with RFID, to a live server-monitoring dashboard on AWS EC2, AI document Q&amp;A and voice/chat assistants, and computer-vision Telegram bots — all built with practical ML pipelines in mind.</p>
+          <p>I also work on research: a review of thermal image super-resolution and a voice-based AI helpdesk simulator (both in preparation), and I took part in icSoftComp 2025 in Hanoi, Vietnam. Right now I'm going deeper into LLMs and retrieval-augmented generation.</p>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card glass reveal" style="--d:.3s">
+            <span class="stat-num" data-target="8">0</span>
+            <span class="stat-label">PROJECTS BUILT</span>
+          </div>
+          <div class="stat-card glass reveal" style="--d:.4s">
+            <span class="stat-num" data-target="2">0</span>
+            <span class="stat-label">RESEARCH PAPERS</span>
+          </div>
+          <div class="stat-card glass reveal" style="--d:.5s">
+            <span class="stat-num" data-target="5">0</span>
+            <span class="stat-label">CERTS &amp; BADGES</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-img-wrap reveal-right" style="--d:.3s">
+        <div class="avatar-wrap">
+          <div class="hex-frame" id="avatar-hex">
+            <svg id="avatar-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;overflow:visible" role="img" aria-label="Illustrated avatar of Moinuddin Mullan">
+              <defs>
+                <!-- Skin — warm light brown -->
+                <radialGradient id="sg" cx="48%" cy="38%" r="58%">
+                  <stop offset="0%" stop-color="#f0c896"/>
+                  <stop offset="55%" stop-color="#dba870"/>
+                  <stop offset="100%" stop-color="#b8824a"/>
+                </radialGradient>
+                <radialGradient id="sg2" cx="50%" cy="50%" r="52%">
+                  <stop offset="0%" stop-color="#dba870"/>
+                  <stop offset="100%" stop-color="#b07038"/>
+                </radialGradient>
+                <!-- Black shirt -->
+                <radialGradient id="shirt" cx="50%" cy="25%" r="65%">
+                  <stop offset="0%" stop-color="#1c1c24"/>
+                  <stop offset="100%" stop-color="#06060a"/>
+                </radialGradient>
+                <!-- Dark curly hair -->
+                <radialGradient id="hair" cx="50%" cy="50%" r="55%">
+                  <stop offset="0%" stop-color="#1e1208"/>
+                  <stop offset="100%" stop-color="#050200"/>
+                </radialGradient>
+                <!-- Gold/bronze spectacle frame -->
+                <linearGradient id="specs" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#c8a84b"/>
+                  <stop offset="40%" stop-color="#e8c96a"/>
+                  <stop offset="100%" stop-color="#a07830"/>
+                </linearGradient>
+                <filter id="fshadow">
+                  <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="rgba(0,0,0,0.4)"/>
+                </filter>
+                <filter id="headshadow">
+                  <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="rgba(0,0,0,0.5)"/>
+                </filter>
+                <filter id="hairblur">
+                  <feGaussianBlur stdDeviation="1.2"/>
+                </filter>
+                <clipPath id="hexclip">
+                  <polygon points="200,4 390,102 390,298 200,396 10,298 10,102"/>
+                </clipPath>
+              </defs>
+
+              <!-- everything inside head-group rotates on cursor -->
+              <g id="head-group" style="transform-origin:200px 195px">
+
+                <!-- BG glow -->
+                <circle cx="200" cy="210" r="170" fill="rgba(0,229,204,0.035)"/>
+                <circle cx="200" cy="210" r="130" fill="rgba(0,229,204,0.025)"/>
+
+                <!-- ── BODY / SHIRT ── -->
+                <ellipse cx="200" cy="390" rx="135" ry="95" fill="url(#shirt)"/>
+                <path d="M158 278 Q178 300 200 294 Q222 300 242 278 L252 340 Q200 368 148 340 Z" fill="#111118"/>
+                <path d="M172 284 Q200 302 228 284 L222 296 Q200 310 178 296 Z" fill="#08080e"/>
+                <circle cx="200" cy="316" r="2.5" fill="#2a2a35"/>
+                <circle cx="200" cy="332" r="2.5" fill="#2a2a35"/>
+                <ellipse cx="176" cy="335" rx="20" ry="14" fill="rgba(255,255,255,0.03)" transform="rotate(-18,176,335)"/>
+
+                <!-- ── NECK ── -->
+                <rect x="180" y="262" width="40" height="32" rx="10" fill="url(#sg2)" filter="url(#fshadow)"/>
+                <rect x="180" y="262" width="9" height="32" rx="5" fill="rgba(0,0,0,0.18)"/>
+                <rect x="211" y="262" width="9" height="32" rx="5" fill="rgba(0,0,0,0.13)"/>
+
+                <!-- ── HEAD ── -->
+                <ellipse cx="200" cy="192" rx="88" ry="97" fill="url(#sg)" filter="url(#headshadow)"/>
+                <ellipse cx="130" cy="198" rx="26" ry="60" fill="rgba(0,0,0,0.13)"/>
+                <ellipse cx="270" cy="198" rx="22" ry="52" fill="rgba(0,0,0,0.09)"/>
+                <ellipse cx="200" cy="278" rx="42" ry="14" fill="rgba(0,0,0,0.18)"/>
+                <ellipse cx="188" cy="148" rx="30" ry="20" fill="rgba(255,255,255,0.07)" transform="rotate(-12,188,148)"/>
+                <ellipse cx="148" cy="220" rx="20" ry="13" fill="rgba(255,160,100,0.08)"/>
+                <ellipse cx="252" cy="220" rx="20" ry="13" fill="rgba(255,160,100,0.08)"/>
+
+                <!-- ── EARS ── -->
+                <ellipse cx="113" cy="200" rx="13" ry="17" fill="#dba870"/>
+                <ellipse cx="113" cy="200" rx="7" ry="11" fill="#c08858"/>
+                <ellipse cx="287" cy="200" rx="13" ry="17" fill="#dba870"/>
+                <ellipse cx="287" cy="200" rx="7" ry="11" fill="#c08858"/>
+
+                <!-- ── HAIR ── -->
+                <ellipse cx="200" cy="116" rx="87" ry="50" fill="#0d0804"/>
+                <ellipse cx="178" cy="104" rx="55" ry="38" fill="#100805"/>
+                <ellipse cx="218" cy="106" rx="45" ry="32" fill="#120907"/>
+                <circle cx="155" cy="105" r="18" fill="#0e0603"/>
+                <circle cx="178" cy="96" r="20" fill="#0c0502"/>
+                <circle cx="202" cy="93" r="18" fill="#0e0603"/>
+                <circle cx="225" cy="97" r="17" fill="#100705"/>
+                <circle cx="245" cy="108" r="15" fill="#0d0502"/>
+                <ellipse cx="120" cy="145" rx="26" ry="42" fill="#0d0602"/>
+                <ellipse cx="280" cy="145" rx="26" ry="42" fill="#0d0602"/>
+                <circle cx="118" cy="130" r="14" fill="#0a0401"/>
+                <circle cx="108" cy="148" r="12" fill="#0c0502"/>
+                <circle cx="282" cy="130" r="14" fill="#0a0401"/>
+                <circle cx="292" cy="148" r="12" fill="#0c0502"/>
+                <path d="M155 98 Q190 86 225 92" stroke="#2e1e0e" stroke-width="2.5" fill="none" opacity="0.6" stroke-linecap="round"/>
+                <path d="M165 104 Q195 94 222 99" stroke="#3a2510" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
+                <rect x="112" y="172" width="17" height="36" rx="6" fill="#0d0602"/>
+                <rect x="271" y="172" width="17" height="36" rx="6" fill="#0d0602"/>
+                <ellipse cx="200" cy="262" rx="28" ry="10" fill="rgba(10,5,0,0.18)"/>
+                <path d="M185 243 Q200 249 215 243" stroke="rgba(10,5,0,0.35)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+                <!-- ── EYEBROWS ── -->
+                <path d="M155 162 Q172 154 190 157" stroke="#100804" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <path d="M210 157 Q228 154 245 162" stroke="#100804" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <path d="M157 163 Q172 156 188 158" stroke="#1e1008" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+                <path d="M212 158 Q228 156 243 163" stroke="#1e1008" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+                <!-- ── EYE AREA ── -->
+                <ellipse cx="174" cy="186" rx="21" ry="16" fill="rgba(0,0,0,0.1)"/>
+                <ellipse cx="226" cy="186" rx="21" ry="16" fill="rgba(0,0,0,0.1)"/>
+                <ellipse cx="174" cy="186" rx="18" ry="13" fill="#f5f0ea"/>
+                <ellipse cx="226" cy="186" rx="18" ry="13" fill="#f5f0ea"/>
+                <path d="M156 180 Q174 175 192 180" fill="rgba(0,0,0,0.07)"/>
+                <path d="M208 180 Q226 175 244 180" fill="rgba(0,0,0,0.07)"/>
+
+                <!-- IRIS + PUPIL (tracked by JS) -->
+                <g id="eye-left">
+                  <circle id="iris-left"   cx="174" cy="186" r="8.5" fill="#4a3010"/>
+                  <circle id="pupil-left"  cx="174" cy="186" r="5"   fill="#080400"/>
+                  <circle id="reflect-left" cx="177" cy="183" r="2"  fill="rgba(255,255,255,0.75)"/>
+                  <circle id="reflect2-left" cx="172" cy="189" r="1" fill="rgba(255,255,255,0.3)"/>
+                </g>
+                <g id="eye-right">
+                  <circle id="iris-right"   cx="226" cy="186" r="8.5" fill="#4a3010"/>
+                  <circle id="pupil-right"  cx="226" cy="186" r="5"   fill="#080400"/>
+                  <circle id="reflect-right" cx="229" cy="183" r="2"  fill="rgba(255,255,255,0.75)"/>
+                  <circle id="reflect2-right" cx="224" cy="189" r="1" fill="rgba(255,255,255,0.3)"/>
+                </g>
+
+                <!-- Eyelids / lashes -->
+                <path d="M156 180 Q174 170 192 180" stroke="#180e04" stroke-width="2.5" fill="rgba(120,70,30,0.12)" stroke-linecap="round"/>
+                <path d="M208 180 Q226 170 244 180" stroke="#180e04" stroke-width="2.5" fill="rgba(120,70,30,0.12)" stroke-linecap="round"/>
+                <path d="M157 179 Q174 169 191 179" stroke="#0a0400" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M209 179 Q226 169 243 179" stroke="#0a0400" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M158 193 Q174 198 190 193" stroke="#b07838" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.4"/>
+                <path d="M210 193 Q226 198 242 193" stroke="#b07838" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.4"/>
+
+                <!-- ══ SPECTACLES ══ -->
+                <ellipse cx="174" cy="186" rx="23" ry="19" fill="none" stroke="url(#specs)" stroke-width="2.8"/>
+                <ellipse cx="174" cy="186" rx="23" ry="19" fill="rgba(180,140,60,0.04)"/>
+                <ellipse cx="226" cy="186" rx="23" ry="19" fill="none" stroke="url(#specs)" stroke-width="2.8"/>
+                <ellipse cx="226" cy="186" rx="23" ry="19" fill="rgba(180,140,60,0.04)"/>
+                <path d="M197 184 Q200 181 203 184" stroke="url(#specs)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <path d="M151 183 Q136 180 118 182" stroke="url(#specs)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <path d="M249 183 Q264 180 282 182" stroke="url(#specs)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <path d="M157 177 Q167 173 178 175" stroke="rgba(255,235,150,0.35)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                <path d="M209 177 Q219 173 230 175" stroke="rgba(255,235,150,0.35)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+
+                <!-- ── NOSE ── -->
+                <path d="M196 196 Q192 216 185 225 Q194 232 200 230 Q206 232 215 225 Q208 216 204 196" fill="rgba(0,0,0,0.09)" stroke="rgba(150,80,30,0.2)" stroke-width="1"/>
+                <ellipse cx="189" cy="225" rx="8" ry="5.5" fill="#c88850" opacity="0.55"/>
+                <ellipse cx="211" cy="225" rx="8" ry="5.5" fill="#c88850" opacity="0.55"/>
+                <ellipse cx="200" cy="215" rx="5" ry="7" fill="rgba(255,255,255,0.06)"/>
+                <path d="M198 196 Q200 206 202 216" stroke="rgba(255,255,255,0.05)" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+                <!-- ── MOUTH ── -->
+                <path d="M180 243 Q192 251 200 250 Q208 251 220 243" stroke="#9a6030" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <path d="M182 243 Q191 237 200 239 Q209 237 218 243" stroke="#885028" stroke-width="1.8" fill="rgba(140,70,30,0.18)" stroke-linecap="round"/>
+                <ellipse cx="200" cy="248" rx="10" ry="3.5" fill="rgba(255,255,255,0.05)"/>
+                <path d="M179 241 Q177 246 180 249" stroke="#a06028" stroke-width="1" fill="none" opacity="0.35" stroke-linecap="round"/>
+                <path d="M221 241 Q223 246 220 249" stroke="#a06028" stroke-width="1" fill="none" opacity="0.35" stroke-linecap="round"/>
+
+              </g><!-- end head-group -->
+            </svg>
+          </div>
+          <div class="hex-ring"></div>
+          <div class="hex-ring2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <h3 class="sub-h reveal">// education<span class="us">_</span></h3>
+    <div class="edu-grid">
+      <div class="reveal" style="--d:.05s">
+        <div class="edu-card glass">
+          <span class="edu-period">JUL 2025 – PRESENT<span class="edu-now">● ONGOING</span></span>
+          <h4 class="edu-inst">Shrimad Rajchandra Institute of Management &amp; Computer Application, UTU, Bardoli</h4>
+          <p class="edu-deg">Master of Computer Applications (MCA)</p>
+          <span class="edu-grade">Sem 1 SGPA: 9.64 / 10</span>
+        </div>
+      </div>
+      <div class="reveal" style="--d:.15s">
+        <div class="edu-card glass">
+          <span class="edu-period">JUL 2022 – APR 2025</span>
+          <h4 class="edu-inst">Veer Narmad South Gujarat University (VNSGU), Valsad, India</h4>
+          <p class="edu-deg">Bachelor of Computer Applications (BCA)</p>
+          <span class="edu-grade">CGPA: 8.75 / 10</span>
+        </div>
+      </div>
+      <div class="reveal" style="--d:.05s">
+        <div class="edu-card glass">
+          <span class="edu-period">2021 – 2022</span>
+          <h4 class="edu-inst">Gujarat Secondary and Higher Secondary Education Board (GSEB)</h4>
+          <p class="edu-deg">Higher Secondary Certificate (HSC) — Class XII, Science Stream</p>
+          <span class="edu-grade">Percentage: 57.14%</span>
+        </div>
+      </div>
+      <div class="reveal" style="--d:.15s">
+        <div class="edu-card glass">
+          <span class="edu-period">2019 – 2020</span>
+          <h4 class="edu-inst">Gujarat Secondary and Higher Secondary Education Board (GSEB)</h4>
+          <p class="edu-deg">Secondary School Certificate (SSC) — Class X</p>
+          <span class="edu-grade">Percentage: 67.66%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-tag reveal">SELECTED WORK</div>
+    <h2 class="section-h reveal" style="--d:.1s">// case_files<span class="us">_</span></h2>
+    <p class="section-lead reveal" style="--d:.15s">MCA, hackathon, freelance and personal projects — from IoT and cloud-deployed dashboards to computer vision, NLP and document AI.</p>
+
+    <div class="projects-grid">
+
+      <!-- iOnYou -->
+      <div class="reveal" style="--d:.05s">
+        <article class="proj-card glass">
+          <div class="proj-card-bar"></div>
+          <div class="proj-card-top">
+            <span class="dot d-red"></span><span class="dot d-yellow"></span><span class="dot d-green"></span>
+            <span class="proj-domain">MCA · IOT</span>
+          </div>
+          <div class="proj-body">
+            <p class="proj-date">2026</p>
+            <h3 class="proj-title">iOnYou — Smart Attendance Monitoring</h3>
+            <p class="proj-sub">A Cost-Optimized IoT Approach</p>
+            <ul class="proj-points">
+              <li>Built a <b>dual-verification attendance system</b> combining ESP32-CAM face recognition and MFRC522 RFID scanning; attendance is recorded only when both biometric and physical credentials match the same student, eliminating proxy attendance.</li>
+              <li>Developed a <b>MERN stack web portal</b> with role-based access for admin and faculty — real-time attendance monitoring, student profile CRUD, and downloadable CSV/PDF reports.</li>
+            </ul>
+            <div class="proj-stack"><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">MongoDB</span><span class="tag">ESP32-CAM</span><span class="tag">MFRC522 RFID</span></div>
+            <div class="proj-links">
+              <a class="proj-link" href="https://github.com/MoinuddinMullan/Project-iOnYou-main" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-github"/></svg>GitHub</a>
+              <a class="proj-link" href="https://ionyou.netlify.app/" target="_blank" rel="noopener noreferrer"><svg class="ic ic-s"><use href="#i-ext"/></svg>Live Demo</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- SIH 2025 -->
+      <div class="reveal" style="--d:.15s">
+        <article class="proj-card glass">
+          <div class="proj-card-bar"></div>
+          <div class="proj-card-top">
+            <span class="dot d-red"></span><span class="dot d-yellow"></span><span class="dot d-green"></span>
+            <span class="proj-domain">HACKATHON · ISRO</span>
+          </div>
+          <div class="proj-body">
+            <p class="proj-date">2025</p>
+            <h3 class="proj-title">Optical-Guided Super-Resolution for Thermal IR Imagery</h3>
+            <p class="proj-sub">SIH 2025 · Space Technology | ISRO</p>
+            <ul class="proj-points">
+              <li>Selected problem statement <b>SIH25171</b> (team <i>Thermal Titans</i>): enhancing low-resolution thermal IR imagery using high-resolution optical images as a spatial guidance signal.</li>
+              <li>Implemented a <b>10-block residual CNN</b> (VDSR/EDSR-inspired) trained on Landsat OLI+TIRS data with a patch-based rasterio pipeline and 4× bicubic degradation to simulate real sensor resolution gaps.</li>
+              <li>Replaced MSE with a combined <b>L1 + Sobel gradient loss</b> to reduce blur; added patience-based early stopping and best-checkpoint saving on the SSL4EO-L benchmark.</li>
+            </ul>
+            <div class="proj-stack"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">Rasterio</span><span class="tag">Scikit-image</span></div>
+            <div class="proj-links">
+              <a class="proj-link" href="https://www.kaggle.com/code/moinuddinmullan/thermal-5-0" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-kaggle"/></svg>Kaggle Model</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- PR Monitoring -->
+      <div class="reveal" style="--d:.25s">
+        <article class="proj-card glass">
+          <div class="proj-card-bar"></div>
+          <div class="proj-card-top">
+            <span class="dot d-red"></span><span class="dot d-yellow"></span><span class="dot d-green"></span>
+            <span class="proj-domain">FREELANCE · DEVOPS</span>
+          </div>
+          <div class="proj-body">
+            <p class="proj-date">2026</p>
+            <h3 class="proj-title">PR Monitoring — Real-Time Server Monitoring Dashboard</h3>
+            <p class="proj-sub">Deployed on AWS EC2</p>
+            <ul class="proj-points">
+              <li>Built a <b>live server monitoring platform</b> giving real-time visibility into CPU, memory, disk, I/O and file-descriptor usage across multiple production servers.</li>
+              <li>Developed a <b>Python agent</b> (psutil) that auto-detects hardware specs and streams metrics every 10–30 s via JWT-authenticated REST; <b>Google Chat webhook alerting</b> with a 10-minute per-metric cooldown prevents notification floods.</li>
+              <li>Built <b>Zabbix-style Recharts dashboards</b> with drag-to-zoom, custom date-range filtering and 10-second live polling; also surfaces <b>vehicle-fleet activity</b> (total/inactive counts) from an external MySQL source.</li>
+            </ul>
+            <div class="proj-stack"><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">MongoDB Atlas</span><span class="tag">Python (psutil)</span><span class="tag">JWT</span><span class="tag">bcrypt</span><span class="tag">Recharts</span><span class="tag">Google Chat Webhooks</span></div>
+            <div class="proj-links">
+              <a class="proj-link" href="http://52.66.144.203:3500/" target="_blank" rel="noopener noreferrer"><svg class="ic ic-s"><use href="#i-ext"/></svg>Live Demo</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- CampusNav -->
+      <div class="reveal" style="--d:.05s">
+        <article class="proj-card glass">
+          <div class="proj-card-bar"></div>
+          <div class="proj-card-top">
+            <span class="dot d-red"></span><span class="dot d-yellow"></span><span class="dot d-green"></span>
+            <span class="proj-domain">PERSONAL · MOBILE</span>
+          </div>
+          <div class="proj-body">
+            <p class="proj-date">2026</p>
+            <h3 class="proj-title">CampusNav — Campus Navigation Application</h3>
+            <p class="proj-sub">Cross-platform · Mobile + Web</p>
+            <ul class="proj-points">
+              <li>Designed and developed a cross-platform campus navigation app for students to explore and navigate within their campus premises.</li>
+              <li>Built both a mobile application and a companion web page using Flutter and Dart, providing a unified experience across devices.</li>
+              <li>Implemented interactive campus maps with location-based guidance to help students locate classrooms, facilities and key landmarks.</li>
+            </ul>
+            <div class="proj-stack"><span class="tag">Flutter</span><span class="tag">Dart</span></div>
+            <div class="proj-links">
+              <a class="proj-link" href="https://github.com/MoinuddinMullan/CampusNav" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-github"/></svg>GitHub</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- AutoCare AI -->
+      <div class="reveal" style="--d:.15s">
+        <article class="proj-card glass">
+          <div class="proj-card-bar"></div>
+          <div class="proj-card-top">
+            <span class="dot d-red"></span><span class="dot d-yellow"></span><span class="dot d-green"></span>
+            <span class="proj-domain">PERSONAL · CONVERSATIONAL AI</span>
+          </div>
+          <div class="proj-body">
+            <p class="proj-date">2026</p>
+            <h3 class="proj-title">AutoCare AI — AI-Powered Vehicle Service Booking Bot</h3>
+            <p class="proj-sub">Chat + Voice assistant</p>
+            <ul class="proj-points">
+              <li>Built a full-stack web application featuring an AI bot that talks to users through both <b>chat and voice</b> to understand their vehicle service requirements.</li>
+              <li>React.js frontend and Node.js/Express.js backend API, with MongoDB Atlas as the cloud database for bookings and user data.</li>
+              <li>Implemented the AI conversational model in Python so the bot can process user input and automatically create or store vehicle service bookings.</li>
+            </ul>
+            <div class="proj-stack"><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">MongoDB Atlas</span><span class="tag">Python</span></div>
+            <div class="proj-links">
+              <a class="proj-link" href="https://github.com/MoinuddinMullan/autocare-ai" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-github"/></svg>GitHub</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- DocuMind -->
+      <div class="reveal" style="--d:.25s">
+        <article class="proj-card glass">
+          <div class="proj-card-bar"></div>
+          <div class="proj-card-top">
+            <span class="dot d-red"></span><span class="dot d-yellow"></span><span class="dot d-green"></span>
+            <span class="proj-domain">PERSONAL · DOCUMENT AI</span>
+          </div>
+          <div class="proj-body">
+            <p class="proj-date">2026</p>
+            <h3 class="proj-title">DocuMind — AI Document Q&amp;A Assistant</h3>
+            <p class="proj-sub">Flutter mobile app + Python AI model</p>
+            <ul class="proj-points">
+              <li>Developed a Flutter-based mobile app that lets users upload multiple PDFs, Word documents and research papers for AI-powered question answering.</li>
+              <li>Integrated a Python AI model that processes the uploaded files and returns accurate, context-aware answers sourced directly from the user's documents.</li>
+              <li>Used MongoDB Atlas to store document metadata and user query history, with a clean Flutter/Dart frontend.</li>
+            </ul>
+            <div class="proj-stack"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">MongoDB Atlas</span><span class="tag">Python</span></div>
+            <div class="proj-links">
+              <a class="proj-link" href="https://github.com/MoinuddinMullan/Documind" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-github"/></svg>GitHub</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- YouTube Sentiment -->
+      <div class="reveal" style="--d:.05s">
+        <article class="proj-card glass">
+          <div class="proj-card-bar"></div>
+          <div class="proj-card-top">
+            <span class="dot d-red"></span><span class="dot d-yellow"></span><span class="dot d-green"></span>
+            <span class="proj-domain">PERSONAL · NLP</span>
+          </div>
+          <div class="proj-body">
+            <p class="proj-date">SEP 2026</p>
+            <h3 class="proj-title">YouTube Comment Sentiment Analyzer</h3>
+            <p class="proj-sub">Frontend on Netlify · Backend on Render</p>
+            <ul class="proj-points">
+              <li>Built a <b>React.js application</b> that classifies YouTube comments into Positive, Neutral and Negative sentiments using a machine learning model trained on a 45K-comment Kaggle dataset.</li>
+              <li>Developed <b>FastAPI REST APIs</b> for single and batch comment analysis using <b>TF-IDF</b> and <b>Logistic Regression</b>.</li>
+              <li>Integrated <b>MongoDB Atlas</b> to store analysis history and created interactive dashboards to visualize sentiment distribution and prediction results.</li>
+            </ul>
+            <div class="proj-stack"><span class="tag">React.js</span><span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">MongoDB Atlas</span><span class="tag">scikit-learn</span><span class="tag">NLP</span></div>
+            <div class="proj-links">
+              <a class="proj-link" href="https://github.com/SapnaPal340/youtube_sentiment_analysis" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-github"/></svg>GitHub</a>
+              <a class="proj-link" href="https://sentiviewai.netlify.app" target="_blank" rel="noopener noreferrer"><svg class="ic ic-s"><use href="#i-ext"/></svg>Live Demo</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- VisionLab Bot -->
+      <div class="reveal" style="--d:.15s">
+        <article class="proj-card glass">
+          <div class="proj-card-bar"></div>
+          <div class="proj-card-top">
+            <span class="dot d-red"></span><span class="dot d-yellow"></span><span class="dot d-green"></span>
+            <span class="proj-domain">TELEGRAM BOT · VISION</span>
+          </div>
+          <div class="proj-body">
+            <p class="proj-date">2026</p>
+            <h3 class="proj-title">VisionLab Bot — AI Vision MultiTool Telegram Bot</h3>
+            <p class="proj-sub">8 AI image-processing features</p>
+            <ul class="proj-points">
+              <li>Supports image captioning (BLIP), OCR (EasyOCR), background removal (U²-Net/rembg), face detection (OpenCV Haar), object detection (YOLOv8), emotion analysis (DeepFace), cartoon effects and image enhancement.</li>
+              <li><b>Modular handler architecture</b> (one file per feature) with inline keyboard menus, per-user mode state and an image router that dispatches uploads to the right AI pipeline.</li>
+              <li>Added a <b>rule-based conversational layer</b> with fuzzy-matched triggers across 13 intent categories for natural small-talk.</li>
+            </ul>
+            <div class="proj-stack"><span class="tag">Python</span><span class="tag">python-telegram-bot</span><span class="tag">BLIP (HuggingFace)</span><span class="tag">YOLOv8</span><span class="tag">DeepFace</span><span class="tag">EasyOCR</span><span class="tag">OpenCV</span><span class="tag">rembg</span></div>
+            <div class="proj-links">
+              <a class="proj-link" href="https://github.com/MoinuddinMullan/VisionLab-Bot" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-github"/></svg>GitHub</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-tag reveal">EXPERTISE</div>
+    <h2 class="section-h reveal" style="--d:.1s">// skill_matrix<span class="us">_</span></h2>
+    <div class="skills-grid">
+      <div class="reveal-left" style="--d:.2s">
+        <div class="skill-panel glass">
+          <p class="panel-title">TECH STACK</p>
+          <div class="skill-row"><span class="skill-label">Programming Languages</span><div class="chips"><span class="chip">Java</span><span class="chip">Python</span><span class="chip">JavaScript</span><span class="chip">C</span><span class="chip">C++</span></div></div>
+          <div class="skill-row"><span class="skill-label">Frontend</span><div class="chips"><span class="chip">React.js</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div></div>
+          <div class="skill-row"><span class="skill-label">Mobile Development</span><div class="chips"><span class="chip">Flutter</span><span class="chip">Dart</span></div></div>
+          <div class="skill-row"><span class="skill-label">Backend</span><div class="chips"><span class="chip">Node.js</span><span class="chip">Express.js</span><span class="chip">REST APIs</span><span class="chip">FastAPI</span></div></div>
+          <div class="skill-row"><span class="skill-label">Databases</span><div class="chips"><span class="chip">MySQL</span><span class="chip">MongoDB</span><span class="chip">SQL</span></div></div>
+          <div class="skill-row"><span class="skill-label">AI / ML Frameworks</span><div class="chips"><span class="chip v">PyTorch</span><span class="chip v">TensorFlow</span><span class="chip v">Scikit-learn</span><span class="chip v">HuggingFace</span><span class="chip v">LangChain</span></div></div>
+          <div class="skill-row"><span class="skill-label">Version Control</span><div class="chips"><span class="chip">Git / GitHub</span></div></div>
+          <div class="skill-row"><span class="skill-label">Core CS</span><div class="chips"><span class="chip">Data Structures &amp; Algorithms (DSA)</span></div></div>
+        </div>
+      </div>
+      <div class="side-stack reveal-right" style="--d:.3s">
+        <div class="skill-panel glass">
+          <p class="panel-title">FOCUS AREAS</p>
+          <div class="tools-grid">
+            <div class="tool-chip">Full-Stack Web</div><div class="tool-chip">AI / ML</div>
+            <div class="tool-chip">Computer Vision</div><div class="tool-chip">NLP &amp; Voice AI</div>
+            <div class="tool-chip">LLMs &amp; RAG</div><div class="tool-chip">IoT</div>
+            <div class="tool-chip">Mobile Apps</div><div class="tool-chip">Cloud Deployment</div>
+          </div>
+        </div>
+        <div class="skill-panel glass">
+          <p class="panel-title">DEPLOYED ON</p>
+          <div class="chips"><span class="chip">AWS EC2</span><span class="chip">Netlify</span><span class="chip">Render</span><span class="chip">MongoDB Atlas</span></div>
+        </div>
+        <div class="skill-panel glass">
+          <p class="panel-title">LANGUAGES</p>
+          <div class="chips"><span class="chip v">English</span><span class="chip v">Gujarati</span><span class="chip v">Hindi</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="wrap">
+    <div class="section-tag reveal">RESEARCH</div>
+    <h2 class="section-h reveal" style="--d:.1s">// papers<span class="us">_</span></h2>
+    <div class="research-grid">
+
+      <div class="reveal" style="--d:.1s">
+        <article class="paper-card glass">
+          <span class="paper-status">UNDER REVIEW / MANUSCRIPT IN PREPARATION</span>
+          <h3 class="paper-title">Multimodal and Deep Learning-Based Thermal Image Super-Resolution: A Review</h3>
+          <p class="paper-team">Collaborated within a six-member research team with Professor</p>
+          <p class="paper-desc">A review tracing thermal IR super-resolution from classical interpolation to CNN, GAN, Transformer and Mamba-based architectures; covers optical-guidance strategies, multimodal fusion, degradation modelling, and benchmarks across medical, defense, remote sensing and autonomous-driving domains.</p>
+          <div class="proj-stack"><span class="tag">CNN</span><span class="tag">GAN</span><span class="tag">Transformer</span><span class="tag">Mamba</span><span class="tag">Multimodal Fusion</span></div>
+          <div class="proj-links">
+            <a class="proj-link" href="https://docs.google.com/document/d/1zEEzoOcy4vzA4lW2rhW3MCP3jV381n1j/edit?usp=drive_link&amp;ouid=115355796693156352971&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer"><svg class="ic ic-s"><use href="#i-ext"/></svg>View Manuscript</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="reveal" style="--d:.2s">
+        <article class="paper-card glass">
+          <span class="paper-status">UNDER REVIEW / MANUSCRIPT IN PREPARATION</span>
+          <h3 class="paper-title">A Voice-Based AI Helpdesk and Appointment Management Simulator for Automotive Service Centres</h3>
+          <p class="paper-desc">A fully offline, open-source voice helpdesk simulator chaining Silero VAD, Faster-Whisper ASR, a rule-based fuzzy-matching intent classifier, a finite-state booking dialogue manager and Facebook MMS TTS — evaluated on 60 typed utterances on CPU-only hardware.</p>
+          <div class="paper-metrics">
+            <div class="metric"><b>78.3%</b><span>WEIGHTED INTENT ACCURACY</span></div>
+            <div class="metric"><b>3.9 s</b><span>AVG END-TO-END LATENCY</span></div>
+            <div class="metric"><b>60</b><span>TYPED UTTERANCES</span></div>
+          </div>
+          <div class="proj-stack"><span class="tag">Silero VAD</span><span class="tag">Faster-Whisper</span><span class="tag">Facebook MMS TTS</span><span class="tag">Dialogue Manager</span></div>
+          <div class="proj-links">
+            <a class="proj-link" href="https://docs.google.com/document/d/190gBbxa9fuKyx5yXROcORCGk2Mtl3um_/edit?usp=drive_link&amp;ouid=115355796693156352971&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer"><svg class="ic ic-s"><use href="#i-ext"/></svg>View Manuscript</a>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section id="credentials">
+  <div class="wrap">
+    <div class="section-tag reveal">CREDENTIALS</div>
+    <h2 class="section-h reveal" style="--d:.1s">// courses_&amp;_certs<span class="us">_</span></h2>
+
+    <div class="cert-list">
+      <div class="reveal" style="--d:.05s">
+        <div class="cert-card glass">
+          <div class="cert-icon"><svg class="ic-s"><use href="#i-award"/></svg></div>
+          <div>
+            <h3 class="cert-title">Building RAG Agents with LLMs</h3>
+            <p class="cert-meta">NVIDIA · Nov 2026</p>
+            <p class="cert-id">Credential ID: mUCC5YjBQD6FZQq4EAC-sg</p>
+          </div>
+          <div class="proj-links"><a class="proj-link" href="https://learn.nvidia.com/certificates?id=mUCC5YjBQD6FZQq4EAC-sg" target="_blank" rel="noopener noreferrer"><svg class="ic ic-s"><use href="#i-ext"/></svg>View Certificate</a></div>
+        </div>
+      </div>
+      <div class="reveal" style="--d:.1s">
+        <div class="cert-card glass">
+          <div class="cert-icon"><svg class="ic-s"><use href="#i-award"/></svg></div>
+          <div>
+            <h3 class="cert-title">Participant — 7th International Conference on Soft Computing &amp; its Engineering Applications (icSoftComp2025)</h3>
+            <p class="cert-meta">CHARUSAT | Springer · Dec 2025</p>
+            <p class="cert-id">Held at Hanoi, Vietnam, Dec 09–11, 2025</p>
+          </div>
+          <div class="proj-links"><a class="proj-link" href="https://drive.google.com/file/d/1eHdVbtYcQUQC60jGbbs9eVFzXXKeDdI8/view?usp=drive_link" target="_blank" rel="noopener noreferrer"><svg class="ic ic-s"><use href="#i-ext"/></svg>View Certificate</a></div>
+        </div>
+      </div>
+      <div class="reveal" style="--d:.15s">
+        <div class="cert-card glass">
+          <div class="cert-icon"><svg class="ic-s"><use href="#i-award"/></svg></div>
+          <div>
+            <h3 class="cert-title">Getting Started with AI on Jetson Nano</h3>
+            <p class="cert-meta">NVIDIA · Aug 2025</p>
+            <p class="cert-id">Credential ID: DiDHCiWZTFymu35LfnqJpA</p>
+          </div>
+          <div class="proj-links"><a class="proj-link" href="https://learn.nvidia.com/certificates?id=DiDHCiWZTFymu35LfnqJpA" target="_blank" rel="noopener noreferrer"><svg class="ic ic-s"><use href="#i-ext"/></svg>View Certificate</a></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-h reveal">// digital_badges<span class="us">_</span></h3>
+    <div class="badge-grid">
+      <div class="reveal" style="--d:.05s">
+        <div class="badge-card glass">
+          <a class="badge-img" href="https://www.credly.com/badges/8dfe3594-fb30-4d0a-afd7-592d342878a0/linked_in_profile" target="_blank" rel="noopener noreferrer" aria-label="Verify Microsoft Pro Badge: GitHub Copilot — Proficient on Credly">
+            <img src="microsoft-pro-badge-github-copilot-proficient.png" alt="Microsoft Pro Badge: GitHub Copilot — Proficient" width="140" height="140" loading="lazy">
+          </a>
+          <div class="badge-info">
+            <h4 class="badge-title">Microsoft Pro Badge: GitHub Copilot — Proficient</h4>
+            <p class="cert-meta">Microsoft · Issued Nov 04, 2026</p>
+            <p class="cert-id">Credential ID: 8dfe3594-fb30-4d0a-afd7-592d342878a0</p>
+            <p class="badge-hint">CLICK THE BADGE TO VERIFY</p>
+            <div class="proj-links"><a class="proj-link" href="https://www.credly.com/badges/8dfe3594-fb30-4d0a-afd7-592d342878a0/linked_in_profile" target="_blank" rel="noopener noreferrer"><svg class="ic ic-s"><use href="#i-ext"/></svg>View Badge</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal" style="--d:.15s">
+        <div class="badge-card glass">
+          <a class="badge-img" href="https://www.credly.com/badges/c2fe107e-3fe0-44c7-b0cd-8357a78c517e/linked_in_profile" target="_blank" rel="noopener noreferrer" aria-label="Verify Building RAG Apps Using MongoDB badge on Credly">
+            <img src="building-rag-apps-using-mongodb.png" alt="MongoDB Skill badge: Building RAG Apps Using MongoDB" width="140" height="140" loading="lazy">
+          </a>
+          <div class="badge-info">
+            <h4 class="badge-title">Building RAG Apps Using MongoDB</h4>
+            <p class="cert-meta">MongoDB · Issued Nov 04, 2026</p>
+            <p class="cert-id">Credential ID: c2fe107e-3fe0-44c7-b0cd-8357a78c517e</p>
+            <p class="badge-hint">CLICK THE BADGE TO VERIFY</p>
+            <div class="proj-links"><a class="proj-link" href="https://www.credly.com/badges/c2fe107e-3fe0-44c7-b0cd-8357a78c517e/linked_in_profile" target="_blank" rel="noopener noreferrer"><svg class="ic ic-s"><use href="#i-ext"/></svg>View Badge</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="section-tag reveal">GET IN TOUCH</div>
+    <h2 class="section-h reveal" style="--d:.1s">// init_contact<span class="us">()</span></h2>
+    <div class="contact-grid">
+      <div class="contact-info glass reveal-left" style="--d:.2s">
+        <p>Open to software development and AI/ML engineering roles, research collaborations and freelance projects — available for <strong style="color:var(--white);font-weight:500">remote work and relocation</strong>. If you're building something with real intelligence behind it, let's build it together.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:mzmulla778@gmail.com"><svg class="ic ic-s"><use href="#i-mail"/></svg>mzmulla778@gmail.com</a>
+          <a class="contact-link" href="tel:+919157671849"><svg class="ic ic-s"><use href="#i-phone"/></svg>+91 91576 71849</a>
+          <span class="contact-link"><svg class="ic ic-s"><use href="#i-pin"/></svg>Valsad, Gujarat, India · Open to Remote, Relocate</span>
+          <a class="contact-link" href="https://www.linkedin.com/in/moinuddin-mullan-691636375" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-linkedin"/></svg>linkedin.com/in/moinuddin-mullan-691636375</a>
+          <a class="contact-link" href="https://github.com/MoinuddinMullan" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-github"/></svg>github.com/MoinuddinMullan</a>
+          <a class="contact-link" href="https://www.kaggle.com/moinuddinmullan" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-kaggle"/></svg>kaggle.com/moinuddinmullan</a>
+        </div>
+        <div class="social-row">
+          <a href="https://github.com/MoinuddinMullan" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="ic"><use href="#i-github"/></svg></a>
+          <a href="https://www.linkedin.com/in/moinuddin-mullan-691636375" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="ic"><use href="#i-linkedin"/></svg></a>
+          <a href="https://www.kaggle.com/moinuddinmullan" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Kaggle"><svg class="ic"><use href="#i-kaggle"/></svg></a>
+          <a href="mailto:mzmulla778@gmail.com" class="social-btn" aria-label="Email"><svg class="ic ic-s"><use href="#i-mail"/></svg></a>
+        </div>
+      </div>
+      <div class="form-card glass reveal-right" style="--d:.3s">
+        <form id="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label class="form-label" for="f-name">NAME_</label>
+            <input class="form-input" id="f-name" type="text" placeholder="Your name" autocomplete="name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-email">EMAIL_</label>
+            <input class="form-input" id="f-email" type="email" placeholder="your@email.com" autocomplete="email" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-subject">SUBJECT_</label>
+            <input class="form-input" id="f-subject" type="text" placeholder="Collaboration / Role / Research">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-msg">MESSAGE_</label>
+            <textarea class="form-input" id="f-msg" placeholder="Tell me about the opportunity..." required></textarea>
+          </div>
+          <button class="btn-submit" type="submit"><span id="btn-label">SEND_MESSAGE &gt;&gt;</span></button>
+          <p class="form-note">// opens your email app with the message pre-filled</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="glass">
+  <p>Designed &amp; Built by <span>Moinuddin Mullan</span> &mdash; <span id="year">2026</span></p>
+  <p>// <span>available for opportunities</span> · remote · relocation</p>
+</footer>
+
+<script>
+/* ─── HELPERS ─── */
+var REDUCE = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ─── YEAR ─── */
+(function(){ var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear(); })();
+
+/* ─── CURSOR (mouse devices only) ─── */
+(function(){
+  if(!window.matchMedia || !window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  var root=document.documentElement;
+  root.classList.add('has-cursor');
+  var cur=document.getElementById('cursor'), ring=document.getElementById('cursor-ring');
+  var mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',function(e){
+    mx=e.clientX; my=e.clientY;
+    cur.style.left=mx+'px'; cur.style.top=my+'px';
+    root.classList.add('cursor-on');
+  });
+  document.addEventListener('mouseleave',function(){ root.classList.remove('cursor-on'); });
+  document.addEventListener('mouseover',function(e){
+    var t=e.target.closest ? e.target.closest('a,button,input,textarea,.tool-chip,.chip') : null;
+    root.classList.toggle('cursor-hover',!!t);
+  });
+  (function animRing(){
+    rx+=(mx-rx)*.15; ry+=(my-ry)*.15;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(animRing);
+  })();
+})();
+
+/* ─── SCROLL PROGRESS + NAV + ACTIVE LINKS ─── */
+(function(){
+  var prog=document.getElementById('progress');
+  var nav=document.getElementById('navbar');
+  var sections=document.querySelectorAll('section[id]');
+  var navLinks=document.querySelectorAll('.nav-links a');
+  function onScroll(){
+    var max=document.documentElement.scrollHeight-window.innerHeight;
+    prog.style.width=(max>0 ? (window.scrollY/max)*100 : 0)+'%';
+    nav.classList.toggle('scrolled',window.scrollY>60);
+    var current='';
+    sections.forEach(function(s){ if(window.scrollY>=s.offsetTop-220) current=s.id; });
+    navLinks.forEach(function(a){ a.classList.toggle('active',a.getAttribute('href')==='#'+current); });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+
+  /* mobile menu */
+  var toggle=document.getElementById('nav-toggle');
+  var links=document.getElementById('nav-links');
+  toggle.addEventListener('click',function(){
+    var open=links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded',open?'true':'false');
+  });
+  navLinks.forEach(function(a){
+    a.addEventListener('click',function(){
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+    });
+  });
+})();
+
+/* ─── SPACE BACKGROUND: STARS + SHOOTING METEORS ─── */
+(function(){
+  var cv=document.getElementById('space-canvas');
+  if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d');
+  var w=0,h=0,dpr=1,stars=[],meteors=[];
+  var last=performance.now(), nextSpawn=last+700;
+
+  function resize(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    w=window.innerWidth; h=window.innerHeight;
+    cv.width=Math.round(w*dpr); cv.height=Math.round(h*dpr);
+    cv.style.width=w+'px'; cv.style.height=h+'px';
+    g.setTransform(dpr,0,0,dpr,0,0);
+    var n=Math.min(260,Math.round(w*h/8000));
+    stars=[];
+    for(var i=0;i<n;i++){
+      var r=Math.random();
+      stars.push({
+        x:Math.random()*w, y:Math.random()*h,
+        r:Math.random()*1.1+.25,
+        ph:Math.random()*6.283, sp:.6+Math.random()*1.6,
+        base:.25+Math.random()*.55,
+        col:r<.1?'168,85,247':(r<.25?'0,229,204':'232,240,254')
+      });
+    }
+    if(REDUCE) draw(performance.now());
+  }
+
+  function spawn(){
+    if(meteors.length>=7) return;
+    var ang=(22+Math.random()*26)*Math.PI/180;      /* 22°–48° below horizontal, heading left */
+    var speed=520+Math.random()*620;                /* px per second */
+    var dx=-Math.cos(ang), dy=Math.sin(ang);
+    var x,y;
+    if(Math.random()<.7){ x=w*(.25+Math.random()*.95); y=-30; }
+    else { x=w+30; y=Math.random()*h*.55; }
+    var rr=Math.random();
+    var col=rr<.55?'0,229,204':(rr<.85?'168,85,247':(rr<.93?'245,158,11':'232,240,254'));
+    meteors.push({x:x,y:y,dx:dx,dy:dy,vx:dx*speed,vy:dy*speed,len:110+Math.random()*190,width:1+Math.random()*1.4,col:col,age:0});
+  }
+
+  function draw(now){
+    var dt=Math.min(.05,(now-last)/1000); last=now;
+    g.clearRect(0,0,w,h);
+
+    var t=now/1000;
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i];
+      var a=s.base*(REDUCE?1:(0.6+0.4*Math.sin(t*s.sp+s.ph)));
+      g.fillStyle='rgba('+s.col+','+a.toFixed(3)+')';
+      g.beginPath(); g.arc(s.x,s.y,s.r,0,6.2832); g.fill();
+    }
+
+    if(REDUCE) return;
+
+    if(now>=nextSpawn){
+      spawn();
+      if(Math.random()<.18) setTimeout(spawn,140);
+      nextSpawn=now+1100+Math.random()*2800;
+    }
+
+    for(var j=meteors.length-1;j>=0;j--){
+      var m=meteors[j];
+      m.age+=dt; m.x+=m.vx*dt; m.y+=m.vy*dt;
+      var tx=m.x-m.dx*m.len, ty=m.y-m.dy*m.len;     /* tail end (behind the head) */
+      if(tx<-30||ty>h+30){ meteors.splice(j,1); continue; }
+      var fade=Math.min(1,m.age/.2);
+
+      var grad=g.createLinearGradient(m.x,m.y,tx,ty);
+      grad.addColorStop(0,'rgba('+m.col+','+(0.95*fade).toFixed(3)+')');
+      grad.addColorStop(.35,'rgba('+m.col+','+(0.35*fade).toFixed(3)+')');
+      grad.addColorStop(1,'rgba('+m.col+',0)');
+      g.strokeStyle=grad; g.lineWidth=m.width; g.lineCap='round';
+      g.beginPath(); g.moveTo(m.x,m.y); g.lineTo(tx,ty); g.stroke();
+
+      var rg=g.createRadialGradient(m.x,m.y,0,m.x,m.y,7);
+      rg.addColorStop(0,'rgba(255,255,255,'+(0.9*fade).toFixed(3)+')');
+      rg.addColorStop(.35,'rgba('+m.col+','+(0.5*fade).toFixed(3)+')');
+      rg.addColorStop(1,'rgba('+m.col+',0)');
+      g.fillStyle=rg; g.beginPath(); g.arc(m.x,m.y,7,0,6.2832); g.fill();
+    }
+  }
+
+  function frame(now){ draw(now); requestAnimationFrame(frame); }
+
+  resize();
+  window.addEventListener('resize',resize);
+  if(!REDUCE) requestAnimationFrame(frame);
+})();
+
+/* ─── HERO PARTICLE NETWORK ─── */
+(function(){
+  var hero=document.getElementById('hero');
+  var canvas=document.getElementById('bg-canvas');
+  if(!hero||!canvas||!canvas.getContext) return;
+  var ctx=canvas.getContext('2d');
+  var W=0,H=0,particles=[],mouseX=-9999,mouseY=-9999;
+
+  function Particle(){ this.reset(); }
+  Particle.prototype.reset=function(){
+    this.x=Math.random()*W; this.y=Math.random()*H;
+    this.vx=(Math.random()-.5)*.4; this.vy=(Math.random()-.5)*.4;
+    this.r=Math.random()*1.5+.5;
+  };
+  Particle.prototype.update=function(){
+    this.x+=this.vx; this.y+=this.vy;
+    if(this.x<0||this.x>W||this.y<0||this.y>H) this.reset();
+  };
+
+  function resize(){
+    W=canvas.width=hero.offsetWidth; H=canvas.height=hero.offsetHeight;
+    var n=Math.min(90,Math.round(W*H/16000));
+    particles=[];
+    for(var i=0;i<n;i++) particles.push(new Particle());
+  }
+  resize();
+  window.addEventListener('resize',resize);
+
+  hero.addEventListener('mousemove',function(e){
+    var r=canvas.getBoundingClientRect();
+    mouseX=e.clientX-r.left; mouseY=e.clientY-r.top;
+  });
+  hero.addEventListener('mouseleave',function(){ mouseX=-9999; mouseY=-9999; });
+
+  function drawFrame(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<particles.length;i++){
+      var p=particles[i];
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(0,229,204,0.5)'; ctx.fill();
+      for(var j=i+1;j<particles.length;j++){
+        var q=particles[j];
+        var d=Math.hypot(p.x-q.x,p.y-q.y);
+        if(d<120){
+          ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y);
+          ctx.strokeStyle='rgba(0,229,204,'+((1-d/120)*.15)+')'; ctx.lineWidth=.5; ctx.stroke();
+        }
+      }
+      var dm=Math.hypot(p.x-mouseX,p.y-mouseY);
+      if(dm<150){
+        ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(mouseX,mouseY);
+        ctx.strokeStyle='rgba(168,85,247,'+((1-dm/150)*.2)+')'; ctx.lineWidth=.5; ctx.stroke();
+      }
+      if(!REDUCE) p.update();
+    }
+  }
+  function loop(){
+    if(window.scrollY<=H) drawFrame();       /* skip drawing when hero is off-screen */
+    requestAnimationFrame(loop);
+  }
+  if(REDUCE) drawFrame(); else loop();
+})();
+
+/* ─── TYPEWRITER ─── */
+(function(){
+  var typed=document.getElementById('typed-text');
+  if(!typed) return;
+  var phrases=[
+    'Building full-stack apps with React, Node.js & FastAPI.',
+    'Training deep-learning models in PyTorch & TensorFlow.',
+    'Shipping RAG, vision and voice-AI projects end to end.'
+  ];
+  if(REDUCE){ typed.textContent=phrases[0]; return; }
+  var pi=0,ci=0,del=false;
+  function loop(){
+    var p=phrases[pi];
+    if(!del){
+      ci++; typed.textContent=p.slice(0,ci);
+      if(ci===p.length){ del=true; setTimeout(loop,2000); return; }
+    }else{
+      ci--; typed.textContent=p.slice(0,ci);
+      if(ci===0){ del=false; pi=(pi+1)%phrases.length; setTimeout(loop,350); return; }
+    }
+    setTimeout(loop,del?35:65);
+  }
+  setTimeout(loop,1800);
+})();
+
+/* ─── REVEAL ON SCROLL + COUNTERS ─── */
+(function(){
+  function runCounter(num){
+    if(num.dataset.done) return;
+    num.dataset.done='1';
+    var target=+num.dataset.target, count=0;
+    if(REDUCE){ num.textContent=target; return; }
+    var step=Math.max(1,Math.ceil(target/40));
+    var t=setInterval(function(){
+      count=Math.min(count+step,target);
+      num.textContent=count;
+      if(count>=target) clearInterval(t);
+    },45);
+  }
+  function show(el){
+    el.classList.add('visible');
+    el.querySelectorAll('[data-target]').forEach(runCounter);
+  }
+  var els=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(show);
+    return;
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      show(e.target);
+      io.unobserve(e.target);
+    });
+  },{threshold:.06,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(el){ io.observe(el); });
+})();
+
+/* ─── AVATAR: HEAD ROTATION + EYE TRACKING ─── */
+(function(){
+  var avatarHex=document.getElementById('avatar-hex');
+  var avatarSvg=document.getElementById('avatar-svg');
+  var headGroup=document.getElementById('head-group');
+  if(!avatarHex||!avatarSvg||!headGroup||REDUCE) return;
+
+  var BASE={left:{x:174,y:186},right:{x:226,y:186}};
+  var MAX_EYE=6, MAX_ROT=8, MAX_TILT=5;
+
+  var curRotX=0,curRotY=0,targetRotX=0,targetRotY=0;
+  var eyeLX=BASE.left.x,eyeLY=BASE.left.y,eyeRX=BASE.right.x,eyeRY=BASE.right.y;
+  var tEyeLX=eyeLX,tEyeLY=eyeLY,tEyeRX=eyeRX,tEyeRY=eyeRY;
+
+  var eyes={};
+  ['left','right'].forEach(function(s){
+    eyes[s]={
+      iris:document.getElementById('iris-'+s),
+      pupil:document.getElementById('pupil-'+s),
+      ref1:document.getElementById('reflect-'+s),
+      ref2:document.getElementById('reflect2-'+s)
+    };
+  });
+
+  function lerp(a,b,t){ return a+(b-a)*t; }
+
+  function updateFromMouse(clientX,clientY){
+    var rect=avatarSvg.getBoundingClientRect();
+    var cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
+    var normX=Math.max(-1,Math.min(1,(clientX-cx)/(rect.width*0.9)));
+    var normY=Math.max(-1,Math.min(1,(clientY-cy)/(rect.height*0.9)));
+    targetRotY=normX*MAX_ROT;
+    targetRotX=-normY*MAX_TILT;
+
+    var sx=rect.width/400, sy=rect.height/400;
+    ['left','right'].forEach(function(side){
+      var b=BASE[side];
+      var ex=rect.left+b.x*sx, ey=rect.top+b.y*sy;
+      var dx=clientX-ex, dy=clientY-ey;
+      var dist=Math.sqrt(dx*dx+dy*dy), ang=Math.atan2(dy,dx);
+      var move=Math.min(dist/28,MAX_EYE);
+      var nx=b.x+Math.cos(ang)*move, ny=b.y+Math.sin(ang)*move;
+      if(side==='left'){ tEyeLX=nx; tEyeLY=ny; } else { tEyeRX=nx; tEyeRY=ny; }
+    });
+  }
+  function resetTargets(){
+    targetRotX=0; targetRotY=0;
+    tEyeLX=BASE.left.x; tEyeLY=BASE.left.y;
+    tEyeRX=BASE.right.x; tEyeRY=BASE.right.y;
+  }
+  function applyEye(side,nx,ny){
+    var e=eyes[side];
+    if(e.iris){ e.iris.setAttribute('cx',nx); e.iris.setAttribute('cy',ny); }
+    if(e.pupil){ e.pupil.setAttribute('cx',nx); e.pupil.setAttribute('cy',ny); }
+    if(e.ref1){ e.ref1.setAttribute('cx',nx+3); e.ref1.setAttribute('cy',ny-3); }
+    if(e.ref2){ e.ref2.setAttribute('cx',nx-2); e.ref2.setAttribute('cy',ny+3); }
+  }
+  function tick(){
+    var speed=0.09;
+    curRotX=lerp(curRotX,targetRotX,speed);
+    curRotY=lerp(curRotY,targetRotY,speed);
+    eyeLX=lerp(eyeLX,tEyeLX,speed*1.3); eyeLY=lerp(eyeLY,tEyeLY,speed*1.3);
+    eyeRX=lerp(eyeRX,tEyeRX,speed*1.3); eyeRY=lerp(eyeRY,tEyeRY,speed*1.3);
+    headGroup.style.transform='perspective(600px) rotateY('+curRotY+'deg) rotateX('+curRotX+'deg)';
+    applyEye('left',eyeLX,eyeLY);
+    applyEye('right',eyeRX,eyeRY);
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  document.addEventListener('mousemove',function(e){
+    var rect=avatarHex.getBoundingClientRect();
+    var pad=280;
+    var near=(e.clientX>rect.left-pad && e.clientX<rect.right+pad && e.clientY>rect.top-pad && e.clientY<rect.bottom+pad);
+    if(near) updateFromMouse(e.clientX,e.clientY); else resetTargets();
+  });
+})();
+
+/* ─── CONTACT FORM (opens the visitor's email app, pre-filled) ─── */
+function handleSubmit(e){
+  e.preventDefault();
+  var name=document.getElementById('f-name').value.trim();
+  var email=document.getElementById('f-email').value.trim();
+  var subject=document.getElementById('f-subject').value.trim() || 'Portfolio enquiry';
+  var msg=document.getElementById('f-msg').value.trim();
+  var body='Name: '+name+'\nEmail: '+email+'\n\n'+msg;
+  var btn=document.getElementById('btn-label');
+  btn.textContent='OPENING MAIL APP...';
+  window.location.href='mailto:mzmulla778@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+  setTimeout(function(){ btn.textContent='READY \u2713'; },1200);
+  setTimeout(function(){ btn.textContent='SEND_MESSAGE >>'; },4200);
+}
+</script>
+</body>
+</html>
